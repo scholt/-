@@ -24,6 +24,8 @@ cache:
   - $HOME/android-sdk
   
 sudo: required
+services:
+  - docker
 language: android
 jdk: oraclejdk8
 
