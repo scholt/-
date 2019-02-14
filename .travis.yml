@@ -69,13 +69,12 @@ jobs:
 #    - yes | sdkmanager "platforms;android-28"
     before_script:
     - export ANDROID_HOME=~/android-sdk
-    - PATH=${PATH}:${ANDROID_HOME}/tools:${ANDROID_HOME}/tools/bin:${ANDROID_HOME}/platform-tools
 #    - echo no | $ANDROID_HOME/tools/bin/avdmanager create avd --force --name test --package 'system-images;android-28;default;x86_64'
-    - yes | sdkmanager --licenses
-    - sdkmanager "system-images;android-$SYS;$ABI" > /dev/null
-    - sdkmanager --list | head -15
-    - yes | sdkmanager --licenses
-    - echo no | avdmanager create avd --force -n test -k "system-images;android-$SYS;$ABI"
+    - yes | $ANDROID_HOME/tools/bin/sdkmanager --licenses
+    - $ANDROID_HOME/tools/bin/sdkmanager "system-images;android-$SYS;$ABI" > /dev/null
+    - $ANDROID_HOME/tools/bin/sdkmanager --list | head -15
+    - yes | $ANDROID_HOME/tools/bin/sdkmanager --licenses
+    - echo no | $ANDROID_HOME/tools/bin/avdmanager create avd --force -n test -k "system-images;android-$SYS;$ABI"
     - $ANDROID_HOME/emulator/emulator -avd test -no-audio -no-window &
     - android-wait-for-emulator
     - $ANDROID_HOME/platform-tools/adb shell settings put global window_animation_scale 0 &
